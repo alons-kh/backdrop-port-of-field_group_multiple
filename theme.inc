@@ -8,7 +8,7 @@
  * TODO implement drag & drop for order and remove item row
  */
 function theme_field_group_multiple_container_form($variables) {
-  drupal_add_css(drupal_get_path('module', 'field_group_multiple') . '/field_group_multiple.css');
+  backdrop_add_css(backdrop_get_path('module', 'field_group_multiple') . '/field_group_multiple.css');
 
   $element = $variables['elements'];
 
@@ -33,7 +33,7 @@ function theme_field_group_multiple_container_form($variables) {
       '#attributes' => array(
         'class' => array(
           'multiple-inline-element',
-          'multiple-item-' . drupal_html_class($delta),
+          'multiple-item-' . backdrop_html_class($delta),
           'clearfix',
           $delta % 2 == 0 ? 'even' : 'odd',
         ),
@@ -50,7 +50,7 @@ function theme_field_group_multiple_container_form($variables) {
         '#attributes' => array(
           'class' => array(
             'multiple-element',
-            'multiple-' . drupal_html_class($field_name),
+            'multiple-' . backdrop_html_class($field_name),
           ),
         ),
         '#weight' => $order,
@@ -64,7 +64,7 @@ function theme_field_group_multiple_container_form($variables) {
   }
 
   $output = '<div class="form-item">';
-  $output .= drupal_render($entries);
+  $output .= backdrop_render($entries);
   $output .= isset($element['#description']) ? '<div class="description">' . $element['#description'] . '</div>' : '';
   $output .= '</div>';
 
@@ -75,7 +75,7 @@ function theme_field_group_multiple_container_form($variables) {
  * TODO implement drag & drop for order and remove item row
  */
 function theme_field_group_multiple_label_value_form($variables) {
-  drupal_add_css(drupal_get_path('module', 'field_group_multiple') . '/field_group_multiple.css');
+  backdrop_add_css(backdrop_get_path('module', 'field_group_multiple') . '/field_group_multiple.css');
 
   $element = $variables['elements'];
 
@@ -108,13 +108,13 @@ function theme_field_group_multiple_label_value_form($variables) {
     $row = array();
     foreach ($_header as $type => $_data) {
       $data = $field_data[$_data['f']];
-      $row[] = array('data' => drupal_render($data), 'class' => '');
+      $row[] = array('data' => backdrop_render($data), 'class' => '');
     }
     $rows[] = array('data' => $row, 'class' => array('row-delta-' . $delta));
   }
 
-  $wrapper_id = drupal_html_id($id . '-add-more-wrapper');
-  $table_id = drupal_html_id($id . '_values');
+  $wrapper_id = backdrop_html_id($id . '-add-more-wrapper');
+  $table_id = backdrop_html_id($id . '_values');
 
   // TODO drag & drop and remove
   $output = '<div class="field-group-multiple-label-value"><div class="form-item">';
@@ -130,7 +130,7 @@ function theme_field_group_multiple_label_value_form($variables) {
  */
 function theme_field_group_multiple_table_form($variables) {
 
-  drupal_add_css(drupal_get_path('module', 'field_group_multiple') . '/field_group_multiple.css');
+  backdrop_add_css(backdrop_get_path('module', 'field_group_multiple') . '/field_group_multiple.css');
   $element = $variables['elements'];
 
   $items = $element['items'];
@@ -187,14 +187,14 @@ function theme_field_group_multiple_table_form($variables) {
     foreach (element_children($field_data, TRUE) as $field_name) {
       $data = $field_data[$field_name];
       $weight = $weights[$field_name];
-      $row[$weight] = array('data' => drupal_render($data), 'class' => '');
+      $row[$weight] = array('data' => backdrop_render($data), 'class' => '');
     }
     ksort($row);
     $rows[] = array('data' => $row, 'class' => array('row-delta-' . $delta));
   }
 
-  $wrapper_id = drupal_html_id($id . '-add-more-wrapper');
-  $table_id = drupal_html_id($id . '_values');
+  $wrapper_id = backdrop_html_id($id . '-add-more-wrapper');
+  $table_id = backdrop_html_id($id . '_values');
 
   // TODO drag & drop and remove
   $output = '<div class="field-group-multiple-table"><div class="form-item">';
@@ -207,7 +207,7 @@ function theme_field_group_multiple_table_form($variables) {
 
 
 function template_preprocess_field_group_multiple_container(&$variables) {
-  drupal_add_css(drupal_get_path('module', 'field_group_multiple') . '/field_group_multiple.css');
+  backdrop_add_css(backdrop_get_path('module', 'field_group_multiple') . '/field_group_multiple.css');
 
   $group = $variables['group'];
   $fields = $variables['fields'];
@@ -248,7 +248,7 @@ function template_preprocess_field_group_multiple_container(&$variables) {
 
 
 function template_preprocess_field_group_multiple_label_value(&$variables) {
-  drupal_add_css(drupal_get_path('module', 'field_group_multiple') . '/field_group_multiple.css');
+  backdrop_add_css(backdrop_get_path('module', 'field_group_multiple') . '/field_group_multiple.css');
 
   $group = $variables['group'];
   $fields = $variables['fields'];
@@ -288,7 +288,7 @@ function template_preprocess_field_group_multiple_label_value(&$variables) {
 
 
 function template_preprocess_field_group_multiple_table(&$variables) {
-  drupal_add_css(drupal_get_path('module', 'field_group_multiple') . '/field_group_multiple.css');
+  backdrop_add_css(backdrop_get_path('module', 'field_group_multiple') . '/field_group_multiple.css');
 
   $group = $variables['group'];
   $fields = $variables['fields'];
@@ -328,12 +328,12 @@ function template_preprocess_field_group_multiple_table(&$variables) {
 
     foreach (element_children($row_values, TRUE) as $field_name) {
       $data = $row_values[$field_name];
-      $row[] = array('data' => drupal_render($data), 'class' => '');
+      $row[] = array('data' => backdrop_render($data), 'class' => '');
     }
     $rows[] = array('data' => $row, 'class' => array('row-delta-' . $delta));
   }
 
-  $table_id = drupal_html_id($id . '_values');
+  $table_id = backdrop_html_id($id . '_values');
   $variables['table'] = theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('id' => $table_id, 'class' => array('field-group-multiple-table'))));
 
   $suggestions_prefix = 'field_group_multiple_table';
